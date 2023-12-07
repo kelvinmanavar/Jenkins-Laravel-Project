@@ -24,8 +24,10 @@ RUN composer install \
     --prefer-dist
 
 RUN php artisan key:generate
+RUN sed -i -e 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+RUN sed -i -e 's|AllowOverride None|AllowOverride All|g' /etc/apache2/apache2.conf
 RUN php artisan migrate
 RUN a2enmod rewrite
 RUN service apache2 restart
-EXPOSE 80
+EXPOSE 8000
 CMD ["apache2-foreground"]

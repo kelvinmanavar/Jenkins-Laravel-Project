@@ -27,5 +27,5 @@ RUN php artisan key:generate
 RUN php artisan migrate
 RUN a2enmod rewrite
 RUN service apache2 restart
-EXPOSE 8000
+EXPOSE 80
 CMD ["apache2-foreground"]
